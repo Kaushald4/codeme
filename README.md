@@ -177,7 +177,7 @@ This project is licensed under the MIT License.
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/your-repo/issues) page
+1. Check the [Issues](https://github.com/kaushald4/codeme/issues) page
 2. Create a new issue if needed
 
 ---
