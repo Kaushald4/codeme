@@ -2,10 +2,10 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import CodeEditor from "@/components/CodeEditor";
 
-const EditorPage = () => {
+function EditorContent() {
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room") || "default-room";
   const theme = (searchParams.get("theme") as "light" | "dark") || "light";
@@ -56,6 +56,18 @@ const EditorPage = () => {
       </div>
     </div>
   );
-};
+}
+
+const EditorPage = () => (
+  <Suspense
+    fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        Loading editor...
+      </div>
+    }
+  >
+    <EditorContent />
+  </Suspense>
+);
 
 export default EditorPage;
