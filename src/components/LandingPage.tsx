@@ -34,7 +34,7 @@ const LandingPage = () => {
           {/* Hero Section */}
           <div className="text-center mb-16">
             <a
-              href="https://github.com/kaushald4"
+              href="https://github.com/Kaushald4/codeme"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex border border-blue-200 backdrop-blur-md mb-5 px-2 rounded-2xl items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors"
@@ -242,7 +242,7 @@ const LandingPage = () => {
               Open source • Free to use • No registration required
             </p>
             <a
-              href="https://github.com/kaushald4"
+              href="https://github.com/Kaushald4/codeme"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors"
