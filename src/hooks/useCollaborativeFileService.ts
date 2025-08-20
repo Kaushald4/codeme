@@ -12,11 +12,16 @@ export function useCollaborativeFileService(roomId: string) {
 
     collaborativeFileService.initializeCollaboration(roomId);
 
-    const checkConnection = () => {
-      setIsConnected(collaborativeFileService.isConnected());
+    const handleStatusChange = ({ status }: { status: string }) => {
+      setIsConnected(status === "connected");
     };
 
-    const connectionInterval = setInterval(checkConnection, 1000);
+    const provider = collaborativeFileService.getProvider();
+    if (provider) {
+      provider.on("status", handleStatusChange);
+      // Set initial connection status
+      setIsConnected(provider.wsconnected);
+    }
 
     const handleFileUpdate = (file: FileItem) => {
       setActiveFile(file);
@@ -37,7 +42,9 @@ export function useCollaborativeFileService(roomId: string) {
     setActiveFile(collaborativeFileService.getActiveFile());
 
     return () => {
-      clearInterval(connectionInterval);
+      if (provider) {
+        provider.off("status", handleStatusChange);
+      }
       collaborativeFileService.destroyCollaboration();
     };
   }, [roomId]);

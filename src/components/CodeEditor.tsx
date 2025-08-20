@@ -311,8 +311,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   return (
     <div className="flex flex-col h-full bg-[#282c34]">
       <FileTabs roomId={roomId} />
-      <div className="flex items-center justify-between p-2 bg-[#1c1e24] !text-white">
-        <div className="flex items-center space-x-2">
+      <div className="flex flex-wrap items-center justify-between p-2 bg-[#1c1e24] !text-white">
+        <div className="flex items-center space-x-2 mb-2 sm:mb-0">
           <div
             className={`w-3 h-3 rounded-full ${
               collaborativeService.isConnected ? "bg-green-500" : "bg-red-500"
@@ -323,14 +323,14 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           </span>
         </div>
         <div className="flex items-center space-x-2">
-          <span className="text-sm text-gray-400 dark:text-gray-300">
+          <span className="text-sm text-gray-400 dark:text-gray-300 hidden sm:inline">
             Users: {userCount}
           </span>
-          <span className="text-sm text-gray-400 dark:text-gray-300">
+          <span className="text-sm text-gray-400 dark:text-gray-300 hidden sm:inline">
             Room: {roomId}
           </span>
           {activeFile && (
-            <span className="text-sm text-gray-400 dark:text-gray-300">
+            <span className="text-sm text-gray-400 dark:text-gray-300 hidden sm:inline">
               File: {activeFile.name}
             </span>
           )}

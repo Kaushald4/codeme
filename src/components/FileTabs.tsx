@@ -15,8 +15,6 @@ export const FileTabs: React.FC<FileTabsProps> = ({
   const collaborativeService = useCollaborativeFileService(roomId);
   const files = collaborativeService.files;
   const activeFile = collaborativeService.activeFile;
-  console.log("Files in FileTabs:", files);
-  console.log("Active file in FileTabs:", activeFile);
   const canAddFile = files.length < 20; // Limit to 20 files
   const canDeleteFile = files.length > 1; // Must have at least 1 file
   const [editingFileId, setEditingFileId] = useState<string | null>(null);
@@ -31,8 +29,6 @@ export const FileTabs: React.FC<FileTabsProps> = ({
   }, [editingFileId]);
 
   const handleTabClick = (fileId: string) => {
-    console.log("Tab clicked:", fileId);
-    console.log("Active file before switch:", activeFile?.id);
     collaborativeService.switchToFile(fileId);
   };
 
@@ -81,7 +77,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({
         {files.map((file: FileItem) => (
           <div
             key={file.id}
-            className={`flex items-center px-4 py-2 cursor-pointer border-r border-gray-700 min-w-max ${
+            className={`flex items-center px-3 sm:px-4 py-2 cursor-pointer border-r border-gray-700 min-w-max ${
               file.isActive || file.id === activeFile?.id
                 ? "bg-gray-900 text-white"
                 : "bg-[#1c1e24] text-gray-300 hover:bg-gray-700"
@@ -89,7 +85,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({
             onClick={() => handleTabClick(file.id)}
             onDoubleClick={() => handleTabDoubleClick(file.id, file.name)}
           >
-            <FileText className="h-4 w-4 mr-2 flex-shrink-0" />
+            <FileText className="h-4 w-4 mr-2 flex-shrink-0 hidden sm:block" />
             {editingFileId === file.id ? (
               <input
                 ref={inputRef}
@@ -102,7 +98,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              <span className="text-sm font-medium truncate max-w-xs">
+              <span className="text-sm font-medium truncate max-w-[100px] sm:max-w-xs">
                 {file.name}
               </span>
             )}
@@ -120,7 +116,7 @@ export const FileTabs: React.FC<FileTabsProps> = ({
 
       {canAddFile && (
         <button
-          className="flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 ml-auto"
+          className="flex items-center justify-center p-2 text-gray-400 hover:text-white hover:bg-gray-700 ml-auto hidden sm:flex"
           onClick={handleAddFile}
           title="Add new file"
         >
